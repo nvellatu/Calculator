@@ -1,3 +1,29 @@
+//make calc dragable
+const calculator = document.querySelector('.calculator');
+let isDragging = false;
+let offsetX = 0, offsetY = 0;
+
+calculator.addEventListener('mousedown', (e) => {
+    if (!e.target.closest('button')) {
+        isDragging = true;
+        offsetX = e.clientX - calculator.getBoundingClientRect().left;
+        offsetY = e.clientY - calculator.getBoundingClientRect().top;
+    }
+});
+
+document.addEventListener('mousemove', (e) => {
+    if (isDragging) {
+        calculator.style.position = 'absolute'; // Ensure absolute positioning
+        calculator.style.left = `${e.clientX - offsetX}px`;
+        calculator.style.top = `${e.clientY - offsetY}px`;
+    }
+});
+
+document.addEventListener('mouseup', () => {
+    isDragging = false; 
+});
+
+
 function add(a, b) {
     return a + b;
 }
